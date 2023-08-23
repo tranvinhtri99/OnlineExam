@@ -1,0 +1,20 @@
+<ng-template [ngIf]="exam">
+  <p class="h2" >{{exam.name}}</p>
+
+  <h4 *ngIf="exam.subject" >{{exam.subject.name}}</h4>
+
+  <p>{{accountName}}</p>
+
+  <p>
+    Time : <app-countdown [countdown]="exam.timeCountDown ?? 0" (callback)="submitExam()" ></app-countdown>
+  </p>
+
+  <ng-container *ngFor="let question of exam.questions; let i = index">
+    <app-question-exam [question]="question" [index]="i" ></app-question-exam>
+  </ng-container>
+
+  <p>
+    <button mat-raised-button color="primary" (click)="submitExam()">Submit the exam</button>
+  </p>
+
+</ng-template>

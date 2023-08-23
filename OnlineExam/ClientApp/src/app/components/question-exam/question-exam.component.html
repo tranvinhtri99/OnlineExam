@@ -1,0 +1,28 @@
+<span>
+  Question {{indexQuestion}}: {{question.text}}
+</span>
+
+<table>
+  <ng-container *ngFor="let answer of question.answers; let iRow = index">
+    <ng-template [ngIf]="iRow%4 === 0">
+      <tr class="data-row-index-{{iRow}}">
+        <ng-container *ngFor="let answer of question.answers; let i = index">
+          <td class="data-row-index-{{i}}" class="tile-answer" *ngIf="(i < iRow + 4) && (i >= iRow)" style="width: {{percentWidth}}%">
+            <mat-checkbox [(ngModel)]="answer.selected">{{answer.answer}}</mat-checkbox>
+          </td>
+        </ng-container>
+
+          <td *ngFor="let empty of columnEmpty" class="tile-answer" style="width: {{percentWidth}}%"> </td>
+
+      </tr>
+    </ng-template>
+  </ng-container>
+
+
+</table>
+
+<!--<mat-grid-list [cols]="colAnswer">-->
+<!--  <mat-grid-tile *ngFor="let answer of question.answers" class="tile-answer">-->
+<!--    -->
+<!--  </mat-grid-tile>-->
+<!--</mat-grid-list>-->

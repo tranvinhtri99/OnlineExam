@@ -1,0 +1,30 @@
+
+<div class="row">
+  <button class="col mx-3"  type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+  <input type="file" hidden appReadexcel #readExcel="readexcel" id="file" #fileInput (eventEmitter)="dataFromEventEmitter($event)" accept=".xlsx" >
+
+  <button class="col mx-3" type="button" mat-raised-button color="primary" (click)="uploadQuestion()" [disabled]="countQuestion == 0">Upload</button>
+
+  <button class="col mx-3" type="button" mat-raised-button color="warn" [disabled]="uploading" [mat-dialog-close]="uploaded">{{uploaded ? "Done" : "Cancel"}}</button>
+</div>
+
+
+<div *ngIf="countQuestion > 0" class="wrapper-question">
+  <p>
+    {{countQuestion}} Questions
+  </p>
+
+  <ng-container *ngIf="uploading || uploaded">
+    <p class="count-question-success">
+      {{countQuestionSuccess}} Questions Success
+    </p>
+
+    <p class="count-question-fail">
+      {{countQuestionFail}} Questions Fail
+    </p>
+
+    <mat-progress-bar mode="determinate" [value]="percentProgress"></mat-progress-bar>
+  </ng-container>
+
+</div>
+

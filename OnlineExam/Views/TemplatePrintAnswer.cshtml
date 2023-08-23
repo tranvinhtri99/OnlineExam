@@ -1,0 +1,53 @@
+﻿@model OnlineExam.Models.AnswerTestModel.ExamStudentAnswer
+
+
+@foreach (var student in Model.StudentAnswers)
+{
+    <h2 class="new-page">the test: @Model.Name</h2>
+    <p>Subject: @Model.Subject.Name (@Model.Subject.Code - @Model.Subject.NoCredit)</p>
+    <p>Student: @student.Name ~ @student.Username</p>
+    <p>Score: @student.Score</p>
+    <p><br></p>
+
+    for(var index = 0; index < student.Questions.Count; index++)
+    {
+        var question = student.Questions[index];
+        
+        <p><span @(question.Correct ? "question-correct": "question-wrong")>Question @(index+1):</span> @question.Text</p>
+        <ul style="list-style-type: none">
+            @for (var i = 0; i < question.Answers.Count; i++)
+            {
+                var answer = question.Answers[i];
+                <li>
+                    <span @(answer.Selected ? "selected" : "")>@Convert.ToChar(65 + i). </span>
+                    <span @(answer.Correct ? "correct" : "")>@answer.Answer</span>
+                    
+                </li>
+            }
+        </ul>
+    }
+}
+
+<style>
+    .new-page {
+        page-break-before: always;
+        text-align: center;
+        text-transform: uppercase
+    }
+      
+    span[question-correct]{
+      background: aquamarine;
+    }
+    
+    span[question-wrong]{
+        background: darkgreen;
+        color: white;
+    }
+    span[selected]{
+        background: red;
+    }
+        
+    span[correct]{
+        background: yellow;
+    }
+</style>

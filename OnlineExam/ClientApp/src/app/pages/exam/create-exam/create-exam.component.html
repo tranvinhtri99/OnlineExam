@@ -1,0 +1,88 @@
+<h1 mat-dialog-title>Create Exam</h1>
+<hr />
+<form (ngSubmit)="submit()" #formCreateSubject="ngForm">
+  <div mat-dialog-content>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="data.name" maxlength="50" name="name" required >
+      </mat-form-field>
+    </p>
+
+   <p>
+     <mat-form-field>
+       <mat-label>Start</mat-label>
+       <input matInput [ngModel]="data.start" (ngModelChange)="data.start = $event; checkTimeStart($event)" name="start" type="datetime-local" [min]="minDateOut" required>
+     </mat-form-field>
+   </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Time (minutes)</mat-label>
+        <input matInput [(ngModel)]="data.time" type="number" min="1" max="300" name="time" required >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Subject</mat-label>
+        <mat-select required [value]="data.subjectId" (valueChange)="data.subjectId = $event; onSubjectChanged()" >
+          <mat-option *ngFor="let subject of subjects" [value]="subject.id">
+            {{subject | jsonSubject}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Classrooms</mat-label>
+        <mat-select multiple="true" [(value)]="data.classroomsId" >
+          <mat-option *ngFor="let classroom of classrooms" [value]="classroom.id">
+            {{classroom.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+
+    <ng-container *ngFor="let levelQuestion of data.levelQuestions; let i = index">
+      <p class="row">
+        <span class="col-3">Level: </span>
+        <span class="col-2">{{levelQuestion.key}}</span>
+        <span class="col-3">Amount: </span>
+        <span class="col-2">{{levelQuestion.value}}</span>
+
+        <button mat-icon-button color="warn" type="button" (click)="removeLevelQuestion(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </p>
+    </ng-container>
+
+    <p class="row justify-content-between">
+      <mat-form-field class="level-question" appearance="fill">
+        <mat-label>Level</mat-label>
+        <mat-select [value]="levelQuestionTemp.key" (valueChange)="levelQuestionTemp.key = $event; onLevelQuestionCurrentChanged()" >
+          <mat-option *ngFor="let level of levels" [value]="level">
+            {{level}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="level-question" appearance="fill">
+        <mat-label>Questions <i>(Max: {{maxQuestion}})</i></mat-label>
+        <input matInput  [(ngModel)]="levelQuestionTemp.value" type="number" min="0" [max]="maxQuestion"  name="countQuestion" >
+      </mat-form-field>
+
+      <button mat-mini-fab color="accent" type="button" (click)="addLevelQuestion()" >
+        <mat-icon>add</mat-icon>
+      </button>
+    </p>
+
+  </div>
+  <div mat-dialog-actions class="d-flex justify-content-end">
+    <button mat-button matDialogClose >Cancel</button>
+    <button mat-raised-button [type]="'submit'" color="primary" [disabled]="!formCreateSubject.valid" >Create</button>
+  </div>
+</form>

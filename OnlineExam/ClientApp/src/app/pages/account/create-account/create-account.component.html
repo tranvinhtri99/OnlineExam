@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Create Account</h1>
+<hr />
+<form (ngSubmit)="submit()" #formCreateSubject="ngForm">
+  <div mat-dialog-content>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Type Account</mat-label>
+        <mat-select required [(value)]="data.type" >
+          <mat-option *ngFor="let type of stateTypes" [value]="type.key">
+            {{type.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+
+    <p *ngIf="data.type == 0">
+      <mat-form-field appearance="fill">
+        <mat-label>Classroom</mat-label>
+        <mat-select required [(value)]="data.classroomId" >
+          <mat-option *ngFor="let classroom of classrooms" [value]="classroom.id">
+            {{classroom.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="data.username" maxlength="50" name="username" required >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="data.name" maxlength="50" name="name" required >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="data.password" maxlength="50" name="password" required >
+      </mat-form-field>
+    </p>
+
+  </div>
+  <div mat-dialog-actions class="d-flex justify-content-end">
+    <button mat-button matDialogClose >Cancel</button>
+    <button mat-raised-button [type]="'submit'" color="primary" [disabled]="!formCreateSubject.valid" >Create</button>
+  </div>
+</form>

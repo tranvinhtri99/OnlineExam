@@ -1,0 +1,63 @@
+<header *ngIf="logined">
+  <nav
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+  >
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">OnlineExam</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target=".navbar-collapse"
+        aria-label="Toggle navigation"
+        [attr.aria-expanded]="isExpanded"
+        (click)="toggle()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+        [ngClass]="{ show: isExpanded }"
+      >
+        <ul class="navbar-nav flex-grow">
+          <li
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="typeAccount == 1">
+            <a class="nav-link text-dark" [routerLink]="['/exam']">Exam</a>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/subject']" *ngIf="typeAccount == 2">subject</a>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/classroom']" *ngIf="typeAccount == 2">classroom</a>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/account']" *ngIf="typeAccount == 2">account</a>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/question']" *ngIf="typeAccount == 1">question</a>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/score']" *ngIf="typeAccount == 0">Score</a>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+<!--            <a *ngIf="!logined" class="nav-link text-dark" [routerLink]="['/signIn']">Signin</a>-->
+            <button *ngIf="logined" mat-button (click)="signOut()">Sign-out</button>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

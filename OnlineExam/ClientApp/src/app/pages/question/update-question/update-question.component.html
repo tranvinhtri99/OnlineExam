@@ -1,0 +1,60 @@
+<h1 mat-dialog-title>Edit Question</h1>
+<hr />
+<form (ngSubmit)="submit()" #formUpdateSubject="ngForm">
+  <div mat-dialog-content>
+
+    <p hidden>
+      <mat-form-field appearance="fill">
+        <mat-label>Type Question</mat-label>
+        <mat-select required [(value)]="data.type" >
+          <mat-option *ngFor="let type of stateTypes" [value]="type.key">
+            {{type.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Subject</mat-label>
+        <mat-select required [(value)]="data.subjectId" >
+          <mat-option *ngFor="let subject of subjects" [value]="subject.id">
+            {{subject | jsonSubject}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Content Questions</mat-label>
+        <input matInput [(ngModel)]="data.text" maxlength="2000" name="text" required >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Level</mat-label>
+        <input matInput [(ngModel)]="data.level" type="number" min="1" max="99999"  name="level" required >
+      </mat-form-field>
+    </p>
+
+      <p *ngFor="let answer of data.answers; let i = index">
+        <mat-form-field appearance="fill">
+          <mat-checkbox [(ngModel)]="answer.correct" name="{{'answer[' + i + '].correct'}}" class="example-margin my-2">Correct</mat-checkbox>
+          <mat-label>Answer {{i+1}}</mat-label>
+          <input matInput [(ngModel)]="answer.answer" maxlength="2000"  name="{{'answer[' + i + '].text'}}" required >
+        </mat-form-field>
+      </p>
+
+    <p>
+      <button mat-button [type]="'button'" (click)="removeAnswer()" color="remove" >Remove last Answer</button>
+      <button mat-button [type]="'button'" (click)="addAnswer()" color="add" >Add Answer</button>
+    </p>
+
+  </div>
+  <div mat-dialog-actions class="d-flex justify-content-end">
+    <button mat-button matDialogClose >Cancel</button>
+    <button mat-raised-button [type]="'submit'" [disabled]="!formUpdateSubject.valid" color="primary" >Save</button>
+  </div>
+</form>

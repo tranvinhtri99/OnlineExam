@@ -1,0 +1,7 @@
+
+
+
+
+
+<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+<input type="file" hidden appReadexcel #readExcel="readexcel" id="file" #fileInput (eventEmitter)="dataFromEventEmitter($event)" accept=".xlsx" >

@@ -1,0 +1,23 @@
+﻿@model OnlineExam.Models.Responses.QuestionResponses.QuestionAnswer
+
+<p>Question 1: @Model.Text</p>
+<ul style="list-style-type: none">
+    @for (var i = 0; i < Model.Answers.Count; i++)
+    {
+        var answer = Model.Answers[i];
+        <li>
+            <span @(answer.Selected ? "selected" : "")>@Convert.ToChar(65 + i).</span>
+            <span @(answer.Correct ? "correct" : "")>@answer.Answer</span>
+        </li>
+    }
+</ul>
+
+<style>
+    span[selected]{
+        background: red;
+    }
+    
+    span[correct]{
+            background: yellow;
+        }
+</style>

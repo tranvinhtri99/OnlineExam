@@ -1,0 +1,67 @@
+<h1 id="tableLabel">Exam</h1>
+
+<p *ngIf="dataSource.length == 0"><em>Loading...</em></p>
+
+<table *ngIf="dataSource.length != 0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="start">
+    <th mat-header-cell *matHeaderCellDef> Start </th>
+    <td mat-cell *matCellDef="let element"> {{element.start | date:"dd/MM/yyyy HH:mm"}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef> Time </th>
+    <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="subject">
+    <th mat-header-cell *matHeaderCellDef> Subject </th>
+    <td mat-cell *matCellDef="let element"> {{element.subject | jsonSubject}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="countQuestion">
+    <th mat-header-cell *matHeaderCellDef> Count Question </th>
+    <td mat-cell *matCellDef="let element"> {{element.countQuestion}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="countStudent">
+    <th mat-header-cell *matHeaderCellDef> Count Student </th>
+    <td mat-cell *matCellDef="let element"> {{element.countStudents}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="countScore">
+    <th mat-header-cell *matHeaderCellDef> Count Scores </th>
+    <td mat-cell *matCellDef="let element"> {{element.countScores}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th class="th-action-2" mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button class="btn-action-table" mat-icon-button aria-label="Detail Exam" (click)="detailExam(element)">
+        <mat-icon color="accent">remove_red_eye</mat-icon>
+      </button>
+      <button class="btn-action-table" mat-icon-button aria-label="Delete Exam" (click)="confirmDelete(element)">
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div class="popup-container">
+  <button mat-fab color="accent" aria-label="Add Exam" (click)="openModalCreate()" >
+    <mat-icon class="icon-2x">add</mat-icon>
+  </button>
+</div>

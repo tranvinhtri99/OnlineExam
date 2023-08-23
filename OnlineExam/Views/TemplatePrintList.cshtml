@@ -1,0 +1,68 @@
+﻿@model OnlineExam.Models.DTOs.ExamScoreDto
+
+<h2 style="text-align: center;text-transform: uppercase">List Student: @Model.Name</h2>
+<p>Subject: @Model.Subject.Name (@Model.Subject.Code - @Model.Subject.NoCredit)</p>
+<p>Question: @Model.CountQuestion</p>
+<p>Students: @Model.StudentWithScores.Count</p>
+<p><br></p>
+
+@{
+    var contentNoScore = Model.Start.AddMinutes(Model.Time) <= DateTime.Now ? "(absent)" : "";
+}
+
+<table style="width: 100%;">
+    <thead>
+    <tr>
+        <th style="width: 10%;">
+            <div style="text-align: center;">STT</div>
+        </th>
+        <th style="width: 10%;">
+            <div style="text-align: center;">ID</div>
+        </th>
+        <th style="width: 20%;">
+            <div style="text-align: center;">Name</div>
+        </th>
+        <th style="width: 20%;">
+            <div style="text-align: center;">Username</div>
+        </th>
+        <th style="width: 20%;">Classroom</th>
+        <th style="width: 10%;">Score</th>
+        <th style="width: 10%;">Note<br></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @for (var i = 0; i < Model.StudentWithScores.Count; i++)
+    {
+        var student = Model.StudentWithScores[i];
+        <tr>
+            <td style="width: 10%;">
+                <div style="text-align: right;">@(i + 1)</div>
+            </td>
+            <td style="width: 10%;">
+                <div style="text-align: right;">@student.Id</div>
+            </td>
+            <td style="width: 20%;">@student.Name</td>
+            <td style="width: 20%;">@student.Username</td>
+            <td style="width: 20%;">@student.Classroom?.Name</td>
+            <td style="width: 10%;">@(student.Score is null ? contentNoScore : student.Score?.ToString("#.00"))</td>
+            <td style="width: 10%;"></td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<style>
+    table   {
+       border-collapse: collapse;
+       border: 1px solid black;
+    } 
+    table  th {
+       border: 1px solid black;
+       padding: 5px;
+    }
+    table  td {
+       border: 1px solid black;
+       padding: 5px;
+    }
+</style>

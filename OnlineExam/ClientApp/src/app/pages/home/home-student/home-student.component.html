@@ -1,0 +1,9 @@
+<mat-grid-list cols="3" rowHeight="1.5:1">
+  <mat-grid-tile *ngFor="let exam of exams">
+    <app-join-exam [exam]="exam" ></app-join-exam>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<h3 *ngIf="exams.length == 0">
+  You don't have any exam
+</h3>

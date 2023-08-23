@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.popup-container{
+  font-size: 5rem;
+  position: absolute;
+  right: 5%;
+  bottom: 10%;
+}
+
+.icon-2x {
+  transform: scale(2);
+}
+
+.th-action-2{
+  width: 100px;
+}
+
+.th-action-3{
+  width: 150px;
+}
+
+.btn-action-table{
+  margin: -5px !important;
+}
+
+table {
+  width: 100%;
+}
+
+snack-bar-container.error {
+  background: red;
+  color: white;
+}
+
+snack-bar-container.warnig{
+  background: orange
+}
+
+snack-bar-container.success{
+  background: #4e4e4c;
+}
+
+.mat-add{
+  background: #155724;
+  color: white;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+.mat-remove{
+  background: #4e4e4c;
+  color: white;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+.tile-answer > .mat-grid-tile-content{
+  right: auto !important;
+}

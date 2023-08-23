@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Create Subject</h1>
+<hr />
+<form (ngSubmit)="submit()" #formCreateSubject="ngForm">
+  <div mat-dialog-content>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Code</mat-label>
+        <input matInput [(ngModel)]="data.code" type="number" name="code" required >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="data.name" maxlength="50" name="name" required >
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Number of Credit</mat-label>
+        <input matInput [(ngModel)]="data.noCredit" [min]="1" [max]="20" type="number" name="noCredit" required >
+      </mat-form-field>
+    </p>
+  </div>
+  <div mat-dialog-actions class="d-flex justify-content-end">
+    <button mat-button matDialogClose >Cancel</button>
+    <button mat-raised-button [type]="'submit'" color="primary" [disabled]="!formCreateSubject.valid" >Create</button>
+  </div>
+</form>
